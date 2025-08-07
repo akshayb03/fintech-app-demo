@@ -1,97 +1,93 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# FinTech App Demo - Comprehensive README
 
-# Getting Started
+## 📱 Overview
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+**FinTech App Demo** is a modern React Native mobile application that demonstrates a comprehensive digital banking interface. Built with the latest React Native 0.80.2, this project showcases essential fintech features including account management, debit card visualization, transaction handling, and modern UI components.
 
-## Step 1: Start Metro
+The application features a sophisticated bottom sheet navigation system and implements best practices for financial app development, making it an excellent reference for building scalable fintech solutions.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🚀 Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Core Functionality
+- **Multi-Account Management**: Support for multiple bank accounts with real-time balance display
+- **Interactive Debit Cards**: Visual card interface with carousel navigation and card details
+- **Account Operations**: Create new accounts, freeze/unfreeze cards, and manage spending limits
+- **Real-Time Data**: Fetches account information from backend API with live updates
+- **Bottom Sheet Interface**: Modern bottom sheet UI for enhanced user experience
 
-```sh
-# Using npm
+### User Interface
+- **Tab-Based Navigation**: Five main sections - Home, Debit Card, Payments, Credit, and Profile
+- **Responsive Design**: Optimized for both iOS and Android platforms
+- **Modern UI Components**: Clean, fintech-focused design with custom color scheme
+- **SVG Icons**: Scalable vector graphics for crisp display on all screen densities
+
+### Security & Architecture
+- **TypeScript Integration**: Full type safety throughout the application
+- **API-First Design**: RESTful API integration with proper error handling
+- **Modular Architecture**: Well-organized component structure for maintainability
+
+
+## 📋 Prerequisites
+
+Before running this project, ensure you have completed the React Native environment setup:
+
+- **Node.js**: Version 18 or higher
+- **React Native CLI**: Latest version
+- **Android Studio**: For Android development
+- **Xcode**: For iOS development (macOS only)
+- **CocoaPods**: For iOS dependencies
+
+## 🛠️ Installation
+
+### 1. Clone the Repository
+git clone https://github.com/akshayb03/fintech-app-demo.git
+cd fintech-app-demo
+
+### 2. Install Dependencies
+npm install
+
+
+## 🚀 Running the Application
+
+### Start Metro Server
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+### Run on Android or Ios
+npm run ios
 npm run android
 
-# OR using Yarn
-yarn android
-```
 
-### iOS
+## 🔧 Key Dependencies
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### Core Framework
+- **react-native**: 0.80.2 - Core React Native framework
+- **react**: 19.1.0 - React library
+- **typescript**: 5.0.4 - TypeScript support
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### Navigation & UI
+- **@react-navigation/native**: 7.1.17 - Navigation framework
+- **@react-navigation/bottom-tabs**: 7.4.5 - Tab navigation
+- **@gorhom/bottom-sheet**: 5.1.8 - Bottom sheet component
+- **react-native-reanimated**: 3.19.0 - Animation library
+- **react-native-gesture-handler**: 2.27.2 - Gesture handling
 
-```sh
-bundle install
-```
+### Additional Components
+- **react-native-svg**: 15.12.1 - SVG support
+- **react-native-reanimated-carousel**: 4.0.2 - Card carousel
+- **react-native-vector-icons**: 10.3.0 - Icon library
+- **axios**: 1.11.0 - HTTP client
 
-Then, and every time you update your native dependencies, run:
+## 🌐 API Integration
 
-```sh
-bundle exec pod install
-```
+### Backend Endpoints
+// Fetch all accounts
+GET /accounts
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+// Update card status
+PATCH /accounts/{name}/active
 
-```sh
-# Using npm
-npm run ios
+// Create new account
+POST /accounts
 
-# OR using Yarn
-yarn ios
-```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
