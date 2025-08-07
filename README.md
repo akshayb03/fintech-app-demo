@@ -1,12 +1,12 @@
-# FinTech App Demo - Comprehensive README
+# FinTech App Demo
 
-## 📱 Overview
+## Overview
 
 **FinTech App Demo** is a modern React Native mobile application that demonstrates a comprehensive digital banking interface. Built with the latest React Native 0.80.2, this project showcases essential fintech features including account management, debit card visualization, transaction handling, and modern UI components.
 
 The application features a sophisticated bottom sheet navigation system and implements best practices for financial app development, making it an excellent reference for building scalable fintech solutions.
 
-## 🚀 Features
+## Features
 
 ### Core Functionality
 - **Multi-Account Management**: Support for multiple bank accounts with real-time balance display
@@ -40,21 +40,32 @@ Before running this project, ensure you have completed the React Native environm
 ## 🛠️ Installation
 
 ### 1. Clone the Repository
+```bash
 git clone https://github.com/akshayb03/fintech-app-demo.git
 cd fintech-app-demo
+```
 
 ### 2. Install Dependencies
+```bash
 npm install
+
+cd ios
+pod install
+```
 
 
 ## 🚀 Running the Application
 
-### Start Metro Server
-npm start
+### 1. Start Metro Server
+```bash
+npx react-native start --reset-cache
+```
 
-### Run on Android or Ios
+### 2. Run on Android or Ios
+```bash
 npm run ios
 npm run android
+```
 
 
 ## 🔧 Key Dependencies
@@ -80,14 +91,13 @@ npm run android
 ## 🌐 API Integration
 
 ### Backend Endpoints
-// Fetch all accounts
+```bash
 GET /accounts
 
-// Update card status
 PATCH /accounts/{name}/active
 
-// Create new account
 POST /accounts
+```
 
 
 
