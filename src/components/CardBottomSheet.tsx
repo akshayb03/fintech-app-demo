@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, { useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -30,13 +31,16 @@ const CardBottomSheet = ({
   setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const snapPoints = useMemo(() => ['70%', '90%'], []);
+  const [hiddenCardNumbers, setHiddenCardNumbers] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const renderCarousel = () => (
     <>
       <Carousel
         loop={false}
         width={CARD_WIDTH}
-        height={240}
+        height={264}
         autoPlay={false}
         data={accounts}
         scrollAnimationDuration={500}
@@ -46,55 +50,83 @@ const CardBottomSheet = ({
         )}
       />
       <View style={styles.paginationWrapper}>
-        {accounts.map((_, index) => (
-          <View
-            key={index}
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              width: currentIndex === index ? 10 : 8,
-              height: currentIndex === index ? 10 : 8,
-              borderRadius: 5,
-              marginHorizontal: 5,
-              backgroundColor: currentIndex === index ? '#01D167' : '#D0D0D0',
-            }}
-          />
-        ))}
+        {accounts &&
+          accounts.map((_, index) => (
+            <View
+              key={index}
+              style={{
+                width: currentIndex === index ? 10 : 8,
+                height: currentIndex === index ? 10 : 8,
+                borderRadius: 5,
+                marginHorizontal: 5,
+                backgroundColor: currentIndex === index ? '#01D167' : '#D0D0D0',
+              }}
+            />
+          ))}
       </View>
     </>
   );
 
-  const renderCard = (item: Account) => (
-    <View
-      style={[
-        styles.card,
-        {
-          backgroundColor: accounts[currentIndex].isActive
-            ? Colors.primary
-            : Colors.grey1,
-        },
-      ]}
-    >
-      <View style={styles.cardLogo}>
-        <HomeIcon color={Colors.light1} />
-        <Text style={styles.orgName}>aspire</Text>
-      </View>
-      <Text style={styles.cardName}>{item.name}</Text>
-      <View style={styles.cardNumberWrapper}>
-        {item.cardNumber.match(/.{1,4}/g)?.map((chunk, index) => (
-          <Text key={index} style={styles.cardNumber}>
-            {chunk}
+  const renderCard = (item: Account) => {
+    const isHidden = hiddenCardNumbers[item.name] || false;
+
+    return (
+      <View style={{ position: 'relative', top: -10 }}>
+        <Pressable
+          style={styles.hideButton}
+          onPress={() => {
+            setHiddenCardNumbers(prev => ({
+              ...prev,
+              [item.name]: !prev[item.name],
+            }));
+          }}
+        >
+          <Text style={styles.hideButtonText}>
+            {isHidden ? 'Show Number' : 'Hide Number'}
           </Text>
-        ))}
+        </Pressable>
+        <View
+          style={[
+            styles.card,
+            {
+              backgroundColor: accounts[currentIndex].isActive
+                ? Colors.primary
+                : Colors.grey1,
+            },
+          ]}
+        >
+          <View style={styles.cardLogo}>
+            <HomeIcon color={Colors.light1} />
+            <Text style={styles.orgName}>aspire</Text>
+          </View>
+          <Text style={styles.cardName}>{item.name}</Text>
+
+          <View style={styles.cardNumberWrapper}>
+            {isHidden
+              ? Array(4)
+                  .fill('****')
+                  .map((chunk, index) => (
+                    <Text key={index} style={styles.cardNumber}>
+                      {chunk}
+                    </Text>
+                  ))
+              : item.cardNumber.match(/.{1,4}/g)?.map((chunk, index) => (
+                  <Text key={index} style={styles.cardNumber}>
+                    {chunk}
+                  </Text>
+                ))}
+          </View>
+          <View style={styles.cardFooter}>
+            <Text style={styles.cardMeta}>{`Thru: ${
+              item.expiryMonth
+            }/${item.expiryYear.slice(2)}`}</Text>
+            <Text style={styles.cardMeta}>{`CVV: ${item.cvv || 456}`}</Text>
+          </View>
+          <Text style={styles.cardBrand}>VISA</Text>
+        </View>
       </View>
-      <View style={styles.cardFooter}>
-        <Text style={styles.cardMeta}>
-          {`Thru: ${item.expiryMonth}/${item.expiryYear.slice(2)}`}
-        </Text>
-        <Text style={styles.cardMeta}>{`CVV: ${item.cvv || 456}`}</Text>
-      </View>
-      <Text style={styles.cardBrand}>VISA</Text>
-    </View>
-  );
+    );
+  };
 
   return (
     <BottomSheet
@@ -133,8 +165,9 @@ const CardBottomSheet = ({
               </Text>
             </View>
             <Switch
-              value={accounts ? !accounts[currentIndex]?.isActive : false}
+              value={!accounts[currentIndex]?.isActive}
               onValueChange={async value => {
+                console.log('value', value);
                 const updatedAccount = await changeCardStatus(
                   accounts[currentIndex].name,
                   value,
@@ -269,6 +302,22 @@ const styles = StyleSheet.create({
   },
   cardWrapper: { alignItems: 'center' },
   cardNumberWrapper: { flexDirection: 'row' },
+  hideButton: {
+    position: 'relative',
+    bottom: -10,
+    alignSelf: 'flex-end',
+    marginRight: 9,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: Colors.secondary,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    height: 40,
+  },
+  hideButtonText: {
+    color: '#fff',
+    fontWeight: '600',
+  },
 });
 
 export default CardBottomSheet;
